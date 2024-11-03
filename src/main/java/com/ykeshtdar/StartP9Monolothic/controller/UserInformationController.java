@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("patient_info")
 public class UserInformationController {
     private final UserInformationService userInformationService;
 
@@ -44,8 +44,8 @@ public class UserInformationController {
         return userInformationService.updateUserInformation(firstname,lastname,gender,birthdate,address,phoneNumber);
     }
 
-    @DeleteMapping
-    public void deleteUser(@RequestParam("firstname")String firstname){
-         userInformationService.deleteUser(firstname);
-    }
+//    @DeleteMapping
+//    public void deleteUser(@RequestParam("firstname")String firstname){
+//         userInformationService.deleteUser(firstname);
+//    }
 }

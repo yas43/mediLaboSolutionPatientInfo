@@ -7,6 +7,7 @@ import org.springframework.data.annotation.*;
 import org.springframework.data.mongodb.core.mapping.*;
 
 import java.time.LocalDate;
+import java.util.*;
 
 
 @Document("loginForm")
@@ -22,5 +23,6 @@ public class UserInformation {
     String gender;
     String address;
     String phoneNumber;
+    List<Prescription> prescriptions;
 
 }

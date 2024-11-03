@@ -1,6 +1,7 @@
-
+server:
+  port: 8085
 spring:
   data:
     mongodb:
-      database: test
+      database: p9
       uri: mongodb://admin:3539@localhost:27017
