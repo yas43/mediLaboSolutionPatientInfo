@@ -1,7 +1,25 @@
+#server:
+#  port: 8085
+#spring:
+#  data:
+#    mongodb:
+#      database: p9
+#      uri: mongodb://admin:3539@localhost:27017
+
+spring:
+  application:
+    name: medioLaboSolutionPatientInformation
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/P9PatientInformation
+    username: postgres
+    password: 3539
+    driverClassName: org.postgresql.Driver
+
 server:
   port: 8085
-spring:
-  data:
-    mongodb:
-      database: p9
-      uri: mongodb://admin:3539@localhost:27017

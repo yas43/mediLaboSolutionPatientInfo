@@ -1,16 +1,17 @@
 package com.ykeshtdar.StartP9Monolothic.model;
 
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.*;
-import org.springframework.data.mongodb.core.mapping.*;
+import org.springframework.data.annotation.Id;
 
-@Document("prescription")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Prescription {
-    @Id
-    Integer id;
-    String firstname;
-    String note;
-}
+
+//@Entity
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//public class Prescription {
+//    @Id
+//    Integer id;
+//    String firstname;
+//    String note;
+//}
