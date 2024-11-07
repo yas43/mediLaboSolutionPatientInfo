@@ -27,16 +27,22 @@ public class UserInformationService {
                 .orElseThrow(()->new RuntimeException("can not find user by this username"));
     }
 
-    public UserInformation updateUserInformation(String firstname,
+    public UserInformation findById(Integer id){
+        return userInformationRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("patient not founded by this id"));
+    }
+
+    public UserInformation updateUserInformation(Integer id,
+                                                 String firstname,
                                                  String lastname,
                                                  String gender,
                                                  LocalDate birthdate,
                                                  String address,
                                                  String phoneNumber) {
-        if (!isAlreadyExist(firstname)){
-             throw  new RuntimeException("this user dose not exist");
+        if (isAlreadyExist(firstname)){
+             throw  new RuntimeException("this user already exist");
         }
-       UserInformation userInformation = findByUsername(firstname);
+       UserInformation userInformation = findById(id);
         userInformation.setFirstname(firstname);
         userInformation.setLastname(lastname);
         userInformation.setGender(gender);

@@ -32,8 +32,9 @@ public class UserInformationController {
          return userInformationService.addUserInformation(userInformation);
     }
 
-    @PutMapping("/update")
-    public UserInformation update(@RequestParam("firstname")String firstname,
+    @PostMapping("/update")
+    public UserInformation update(@RequestParam("id")Integer id,
+                                  @RequestParam("firstname")String firstname,
                                   @RequestParam("lastname")String lastname,
                                   @RequestParam("gender")String gender,
                                   @RequestParam("birthdate") LocalDate birthdate,
@@ -41,7 +42,14 @@ public class UserInformationController {
                                   @RequestParam("phoneNumber")String phoneNumber
                                   ){
 
-        return userInformationService.updateUserInformation(firstname,lastname,gender,birthdate,address,phoneNumber);
+        return userInformationService.updateUserInformation(id,firstname,lastname,gender,birthdate,address,phoneNumber);
+    }
+
+
+
+    @GetMapping("/findById/{id}")
+    public UserInformation findPatientById(@PathVariable Integer id){
+        return userInformationService.findById(id);
     }
 
 //    @DeleteMapping
