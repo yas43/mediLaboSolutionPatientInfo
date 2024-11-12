@@ -17,7 +17,7 @@ public class UserInformationController {
         this.userInformationService = userInformationService;
     }
 
-    @GetMapping("name")
+    @GetMapping("/name")
     public UserInformation displayUserByName(@RequestParam("firstname")String name){
         return userInformationService.findByUsername(name);
     }
@@ -27,7 +27,7 @@ public class UserInformationController {
         return userInformationService.displayAllUserInformation();
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public UserInformation addUser(@RequestBody UserInformation userInformation){
          return userInformationService.addUserInformation(userInformation);
     }
