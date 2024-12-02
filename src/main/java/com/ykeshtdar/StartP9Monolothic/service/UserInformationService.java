@@ -16,7 +16,12 @@ public class UserInformationService {
     }
 
     public UserInformation addUserInformation(UserInformation userinformation) {
-        if (isAlreadyExist(userinformation.getFirstname())){
+        if (isAlreadyExist(userinformation.getFirstname(),
+                userinformation.getLastname(),
+                userinformation.getGender(),
+                userinformation.getBirthdate(),
+                userinformation.getAddress(),
+                userinformation.getPhoneNumber())){
             throw new RuntimeException("this user is already exist");
         }
        return userInformationRepository.save(userinformation);
@@ -39,7 +44,7 @@ public class UserInformationService {
                                                  LocalDate birthdate,
                                                  String address,
                                                  String phoneNumber) {
-        if (isAlreadyExist(firstname)){
+        if (isAlreadyExist(firstname,lastname,gender,birthdate,address,phoneNumber)){
              throw  new RuntimeException("this user already exist");
         }
        UserInformation userInformation = findById(id);
@@ -62,7 +67,11 @@ public class UserInformationService {
     }
 
 
-    public Boolean isAlreadyExist(String firstname){
-       return userInformationRepository.existsByFirstname(firstname);
+    public Boolean isAlreadyExist(String firstname,String lastname,
+                                  String gender, LocalDate birthdate,
+                                  String address,String phoneNumber){
+//       return userInformationRepository.existsByFirstname(firstname);
+        return userInformationRepository.existsByFirstnameAndLastnameAndBirthdateAndGenderAndAddressAndPhoneNumber(firstname,
+                lastname,birthdate,gender,address,phoneNumber);
     }
 }
