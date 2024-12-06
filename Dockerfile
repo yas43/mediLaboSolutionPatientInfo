@@ -1,4 +1,3 @@
-# Use an OpenJDK 11 base image
 FROM eclipse-temurin:21
 
 #WORKDIR /target
