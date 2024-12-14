@@ -21,15 +21,15 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final RestTemplate restTemplate;
     private final JwtService jwtService;
     private final CustomUserDetailService userDetailService;
-    private final JwtSessionService jwtSessionService;
+//    private final JwtSessionService jwtSessionService;
 
     private static final Set<String> EXCLUDED_PATHS = Set.of("/patient/signUp","/patient/login","/favicon.ico");
 
-    public JwtAuthFilter(RestTemplate restTemplate, JwtService jwtService, CustomUserDetailService userDetailService, JwtSessionService jwtSessionService) {
+    public JwtAuthFilter(RestTemplate restTemplate, JwtService jwtService, CustomUserDetailService userDetailService) {
         this.restTemplate = restTemplate;
         this.jwtService = jwtService;
         this.userDetailService = userDetailService;
-        this.jwtSessionService = jwtSessionService;
+//        this.jwtSessionService = jwtSessionService;
     }
 
 
@@ -57,7 +57,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             UserDetails userDetails = userDetailService.loadUserByUsername(userName);
             System.out.println("inside patient pre filter and user detail is :"+userDetails);
 
-            if (isValidToken(token)) {
+            if (jwtService.validateToken(token)) {
                 System.out.println("inside patient pre filter associate authentication");
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =

@@ -2,6 +2,8 @@ package com.ykeshtdar.StartP9Monolothic.controller;
 
 import com.ykeshtdar.StartP9Monolothic.model.*;
 import com.ykeshtdar.StartP9Monolothic.service.*;
+import jakarta.servlet.http.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,7 +30,8 @@ public class UserInformationController {
     }
 
     @PostMapping("/add")
-    public UserInformation addUser(@RequestBody UserInformation userInformation){
+    public UserInformation addUser(@RequestBody UserInformation userInformation, HttpServletRequest request){
+        System.out.println("inside patient info add method request.headerrs.auth.s7 is :"+request.getHeader(HttpHeaders.AUTHORIZATION.substring(7)));
          return userInformationService.addUserInformation(userInformation);
     }
 

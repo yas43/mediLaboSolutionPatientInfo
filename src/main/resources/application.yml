@@ -26,5 +26,5 @@ server:
 
 service:
   url:
-    patientGetTokenBase: http://localhost:8083/patient
-    patientAuthorizationBase: http://localhost:8082/login
+    patientGetTokenBase: http://localhost:8080/patient
+    patientAuthorizationBase: http://localhost:8080/login
