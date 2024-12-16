@@ -21,6 +21,6 @@ public class UserInformation {
   String gender;
   String address;
   String phoneNumber;
-//    List<Prescription> prescriptions;
+
 
 }

@@ -70,7 +70,6 @@ public class UserInformationService {
     public Boolean isAlreadyExist(String firstname,String lastname,
                                   String gender, LocalDate birthdate,
                                   String address,String phoneNumber){
-//       return userInformationRepository.existsByFirstname(firstname);
         return userInformationRepository.existsByFirstnameAndLastnameAndBirthdateAndGenderAndAddressAndPhoneNumber(firstname,
                 lastname,birthdate,gender,address,phoneNumber);
     }

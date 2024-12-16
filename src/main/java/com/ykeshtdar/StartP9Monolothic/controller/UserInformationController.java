@@ -31,7 +31,7 @@ public class UserInformationController {
 
     @PostMapping("/add")
     public UserInformation addUser(@RequestBody UserInformation userInformation, HttpServletRequest request){
-        System.out.println("inside patient info add method request.headerrs.auth.s7 is :"+request.getHeader(HttpHeaders.AUTHORIZATION.substring(7)));
+
          return userInformationService.addUserInformation(userInformation);
     }
 
@@ -55,8 +55,5 @@ public class UserInformationController {
         return userInformationService.findById(id);
     }
 
-//    @DeleteMapping
-//    public void deleteUser(@RequestParam("firstname")String firstname){
-//         userInformationService.deleteUser(firstname);
-//    }
+
 }
