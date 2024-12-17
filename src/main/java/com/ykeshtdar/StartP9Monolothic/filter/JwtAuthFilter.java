@@ -8,6 +8,7 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.core.context.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.web.authentication.*;
+import org.springframework.security.web.authentication.preauth.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.client.*;
 import org.springframework.web.filter.*;
@@ -21,15 +22,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final RestTemplate restTemplate;
     private final JwtService jwtService;
     private final CustomUserDetailService userDetailService;
-//    private final JwtSessionService jwtSessionService;
 
-    private static final Set<String> EXCLUDED_PATHS = Set.of("/patient/signUp","/patient/login","/favicon.ico");
 
     public JwtAuthFilter(RestTemplate restTemplate, JwtService jwtService, CustomUserDetailService userDetailService) {
         this.restTemplate = restTemplate;
         this.jwtService = jwtService;
         this.userDetailService = userDetailService;
-//        this.jwtSessionService = jwtSessionService;
     }
 
 
@@ -39,6 +37,25 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         System.out.println("inside pre filter patient request header is "+request.getHeader(HttpHeaders.AUTHORIZATION));
+
+
+
+        if ("true".equals(request.getHeader("internalRequest"))) {
+
+            // Create a pre-authenticated token
+            PreAuthenticatedAuthenticationToken authentication =
+                    new PreAuthenticatedAuthenticationToken("internalUser", null, null);
+
+            // Set the authentication in the SecurityContext
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+            filterChain.doFilter(request, response);
+
+            return;
+        }
+
+
 
         String authorizationHeader = request.getHeader("Authorization");
 
@@ -70,24 +87,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-
-
-
-
-    private Boolean isValidToken(String token){
-        String baseUrl = "http://localhost:8082/login/validate";
-        String url = UriComponentsBuilder.fromHttpUrl(baseUrl)
-                .queryParam("token", token)
-                .toUriString();
-        System.out.println("hello im here");
-        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-        if (response.getBody().equals("Valid")) {
-            System.out.println("inside validation of token , token is valid ");
-            return true;
-        }
-        System.out.println("inside validation of token , token is  not valid ");
-        return false;
-    }
 
 
 }
